@@ -1,0 +1,19 @@
+{% load staticfiles %}
+<html>
+  <head>
+    <title>Techno Cru | {% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'utilities.css' %}" />
+    <link rel="stylesheet" href="{% static 'base.css' %}" />
+  </head>
+  <body>
+    <div id="header_container" class="bg-m-dk p5px">
+      <div>
+        <h1>Techno Cru</h1>
+      </div>
+    </div>
+    <div class="bg-m-lt p15px hfull">
+    {% block content %}
+    {% endblock content %}
+    </div>
+  </body>
+</html>

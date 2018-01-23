@@ -3,4 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 
-# Create your views here.
+def site_statement(request):
+    template = "wishlist/site_statement.html"
+    context = {}
+    return render(request, template, context)
