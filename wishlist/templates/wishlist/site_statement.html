@@ -1,70 +1,72 @@
-{% extends "base.html" %}
+{% extends "doc_base.html" %}
 
 {% block title %}
 Site Statement
 {% endblock title %}
 
 {% block content %}
-<div>
-  <div>
-    <p>Author:</p>
-    <p>Ian Kirkpatrick</p>
-  </div>
-  <div>
-    <p>Mission:</p>
-    <p>This website is designed to make life easier for Cru team members who
-    are working on technology for the Thursday night meetings. The focus of
-    this project is organization for Cru team members.</p>
-  </div>
-  <div>
-    <p>Problem Addressed by Site:</p>
-    <p>
-      After speaking with staff in Cru about different equipment needed for sound,
-      media, band and other such things, I have decided that a centralized area for
-      organizing wishlists for different departments of Cru would be very beneficial.
-    </p>
-    <p>
-      While thinking about ways I could do this, I also realized that there are other
-      needs that could be solved by a centralized web server. There is already a web
-      app that I created that deals with <a href="https://github.com/ianbro/cru_inventory">inventory</a>
-      but I thought of other things as well. This website will help to keep the tech
-      team in cru organized and provide easy ways to do some different tasks.
-    </p>
-  </div>
-  <div>
-    <p>Framework:</p>
-    <p>Django 1.11</p>
-  </div>
-  <div>
-    <p>Tools:</p>
-    <ul>
-      <li>
-        <span>Editor:</span>
-        <span></span>
-      </li>
-      <li>
-        <span>Language/Compiler:</span>
-        <span>Python 2.7.12</span>
-      </li>
-      <li>
-        <span>Deployment:</span>
-        <span><a href="https://www.pythonanywhere.com/">Python Anywhere</a></span>
-      </li>
-    </ul>
-  </div>
-  <div>
-    <p>Documentation:</p>
-    <ul>
-      <li>
-        <a href="https://www.djangoproject.com/">Django Documentation</a>
-      </li>
-      <li>
-        <a href="https://github.com/ianbro/ezi">EZI</a>
-      </li>
-      <li>
-        <a href="https://help.pythonanywhere.com/pages/FollowingTheDjangoTutorial/">Python Anywhere</a>
-      </li>
-    </ul>
+<div class="wfull flex row j-center">
+  <div class="flex column a-stretch w450px bg-m-lt-2">
+    <div class="flex column a-center">
+      <p class="bg-m-dk pl25px pr25p pt15px pb15px">Author/Editor:</p>
+      <p class="pl25px pr25px pt5px pb5px">Ian Kirkpatrick</p>
+    </div>
+    <div class="pt25px flex column a-center">
+      <p class="bg-m-dk pl25px pr25px pt15px pb15px">Mission:</p>
+      <p class="pl25px pr25px pt5px">This website is designed to make life easier for Cru team members who
+      are working on technology for the Thursday night meetings. The focus of
+      this project is organization for Cru team members.</p>
+    </div>
+    <div class="pt25px flex column a-center">
+      <p class="bg-m-dk pl25px pr25px pt15px pb15px">Problem Addressed by Site:</p>
+      <p class="pl25px pr25px pt5px pb5px">
+        After speaking with staff in Cru about different equipment needed for sound,
+        media, band and other such things, I have decided that a centralized area for
+        organizing wishlists for different departments of Cru would be very beneficial.
+      </p>
+      <p class="pl25px pr25px pt15px">
+        While thinking about ways I could do this, I also realized that there are other
+        needs that could be solved by a centralized web server. There is already a web
+        app that I created that deals with <a href="https://github.com/ianbro/cru_inventory">inventory</a>
+        but I thought of other things as well. This website will help to keep the tech
+        team in cru organized and provide easy ways to do some different tasks.
+      </p>
+    </div>
+    <div class="pt25px flex column a-center">
+      <p class="bg-m-dk pl25px pr25px pt15px pb15px">Framework:</p>
+      <p class="pl25px pr25px pt5px">Django 1.11</p>
+    </div>
+    <div class="pt25px flex column a-center">
+      <p class="bg-m-dk pl25px pr25px pt15px pb15px">Tools:</p>
+      <ul class="pl25px--ul pr25px pt5px">
+        <li>
+          <span>Editor:</span>
+          <span></span>
+        </li>
+        <li>
+          <span>Language/Compiler:</span>
+          <span>Python 2.7.12</span>
+        </li>
+        <li>
+          <span>Deployment:</span>
+          <span><a href="https://www.pythonanywhere.com/">Python Anywhere</a></span>
+        </li>
+      </ul>
+    </div>
+    <div class="pt25px pb25px flex column a-center">
+      <p class="bg-m-dk pl25px pr25px pt15px pb15px">Documentation:</p>
+      <ul class="pl25px--ul pr25px pt5px">
+        <li>
+          <a href="https://www.djangoproject.com/">Django Documentation</a>
+        </li>
+        <li>
+          <a href="https://github.com/ianbro/ezi">EZI</a>
+        </li>
+        <li>
+          <a href="https://help.pythonanywhere.com/pages/FollowingTheDjangoTutorial/">Python Anywhere</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 {% endblock content %}
