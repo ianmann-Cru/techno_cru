@@ -13,4 +13,5 @@ but I thought of other things as well. This website will help to keep the tech
 team in cru organized and provide easy ways to do some different tasks.
 
 ## Contact Us
-Email: cmucru777tech@gmail.com
+*Project Developer:* Ian Kirkpatrick
+*Project Email:* cmucru777tech@gmail.com

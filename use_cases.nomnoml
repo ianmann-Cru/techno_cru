@@ -1,0 +1,40 @@
+[<actor> Tech Member]
+[<actor> Wishlist Server]
+[<actor> Staff Member|
+Manages budget
+and spending
+]
+[<usecase> View wishlist]
+[<usecase> Add item]
+[<usecase> Mark item
+as bought]
+[<usecase> Email Staff
+Member]
+
+[<note> After buying item]
+[<note> After Item added]
+[<note> Wants new equipment|
+ex.
+- Sound board
+- Microphone
+- Music stand
+- etc...
+]
+
+[Tech Member] -- [Wants new equipment]
+[Tech Member] - [Add item]
+[Add item] - [Wishlist Server]
+[Staff Member] - [View wishlist]
+[View wishlist] - [Wishlist Server]
+[Staff Member] - [Mark item
+as bought]
+[Mark item
+as bought] - [Wishlist Server]
+[Mark item
+as bought] -- [After buying item]
+[Wishlist Server] - [Email Staff
+Member]
+[Email Staff
+Member] -- [After Item added]
+[Email Staff
+Member] - [Staff Member]
