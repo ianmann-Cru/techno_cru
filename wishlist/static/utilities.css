@@ -1,0 +1,18 @@
+* {
+  --main-color-dark: #a6a6a6;
+  --main-color-light: #f9f9f9;
+  margin: 0px;
+  padding: 0px;
+}
+
+.flex { display: flex; }
+.row { flex-direction: row; }
+.spc-btwn { justify-content: space-between; }
+
+.m0px { margin: 0px; }
+.p5px { padding: 5px; }
+.p15px { padding: 15px; }
+.hfull { height: 100%; }
+
+.bg-m-dk { background-color: var(--main-color-dark); }
+.bg-m-lt { background-color: var(--main-color-light); }
