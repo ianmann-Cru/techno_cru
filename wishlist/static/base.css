@@ -1,3 +1,11 @@
+* {
+  font-family: Helvetica;
+}
+
 #header_container {
   height: 350px;
+}
+
+#footer_container {
+  height: 100px;
 }
