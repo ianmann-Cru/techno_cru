@@ -26,6 +26,7 @@ workon $ENV_NAME
 pip install -r requirements.txt
 
 ./manage.py migrate
+./manage.py collectstatic
 
 cd $WSGI_DESTINATION_DIR
 ln -s $WSGI_SRC $WSGI_DESTINATION_NAME
