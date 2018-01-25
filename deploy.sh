@@ -7,6 +7,10 @@ PROJ_DIR_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ENVS_HOME_DIR="$HOME/envs/"
 ENV_NAME=$PROJ_NAME
 
+WSGI_SRC="$PROJ_DIR_PATH/$PROJ_NAME/wsgi/production.py"
+WSGI_DESTINATION_DIR="/var/www/"
+WSGI_DESTINATION_NAME="technocru_pythonanywhere_com_wsgi.py"
+
 cd "$PROJ_DIR_PATH/$PROJ_NAME"
 rm settings.py
 rm settings.pyc
@@ -23,4 +27,5 @@ pip install -r requirements.txt
 
 ./manage.py migrate
 
-#ln -s techno_cru/wsgi/production.py /var/www/technocru_pythonanywhere_com_wsgi.py
+cd $WSGI_DESTINATION_DIR
+ln -s $WSGI_SRC $WSGI_DESTINATION_NAME
