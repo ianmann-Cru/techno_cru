@@ -10,10 +10,10 @@ ALLOWED_HOSTS = ["technocru.pythonanywhere.com"]
 WSGI_APPLICATION = 'techno_cru.wsgi.production.application'
 
 DATABASES = {
-    'default': {                                                                                                                                
+    'default': {
     'ENGINE': 'django.db.backends.sqlite3',
     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
-STATIC_ROOT = "static/"
+STATIC_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), '../static/'))
