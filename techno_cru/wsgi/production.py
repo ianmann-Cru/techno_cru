@@ -14,7 +14,7 @@ to get the project working as far as wsgi configuration goes.
 import os
 import sys
 
-path = '/home/technocru/techno_cru'
+path = '/home/technocru/sites/techno_cru'
 if path not in sys.path:
     sys.path.append(path)
 

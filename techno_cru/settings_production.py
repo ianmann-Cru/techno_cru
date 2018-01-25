@@ -8,3 +8,10 @@ DEBUG = False
 ALLOWED_HOSTS = ["technocru.pythonanywhere.com"]
 
 WSGI_APPLICATION = 'techno_cru.wsgi.production.application'
+
+DATABASES = {
+    'default': {                                                                                                                                
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
