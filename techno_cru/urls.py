@@ -16,7 +16,9 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from main import urls as main_urls
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^wishlist/', include("wishlist.urls", namespace="wishlist"))
+    url(r'^', include(main_urls, namespace="main"))
 ]

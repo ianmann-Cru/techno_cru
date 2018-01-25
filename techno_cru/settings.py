@@ -28,6 +28,13 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+CRU_INFO = {
+    "GLOBAL_WEBSITE": "https://www.cru.org/",
+    "LOCAL_NAME": "Mid Michigan Cru",
+    "MTL_EMAIL": "tobias.keyes@cru.org"
+}
+
+
 # Application definition
 
 INSTALLED_APPS = [
