@@ -1,0 +1,57 @@
+[TeamMember | Extends User |
+role: int (staff,student) |
+]
+
+[ItemRequest |
+
+item_name: string
+description: text
+notes: text
+online_order_links: string
+quantity: int
+priority: float
+date_requested: date
+quality: string
+price_floor: float
+prince_ceiling: float |
+
+mark_bought(amount, cost, link, member)
+mark_unnecessary(member, reason)
+]
+
+[Wishlist |
+name: string
+purpose: string
+date_started: date
+active: boolean
+date_inactive: date
+date_complete: date
+comments: text
+permenant: boolean |
+mark_complete(member)
+mark_inactive(member, reason)
+mark_active(member, reason)
+]
+
+[ItemRecord |
+type: int (unnecessary,bought,already_have)
+comments: text
+cost: float |
+]
+
+//==================================================//
+
+[ItemRequest] - [Requested_By]
+[Requested_By] -> [TeamMember]
+
+[ItemRecord] - [Belongs_To]
+[Belongs_To] -> [Wishlist]
+
+[Wishlist] - [Created_By]
+[Created_By] -> [TeamMember]
+
+[ItemRecord] - [Reported_By]
+[Reported_By] -> [TeamMember]
+
+[ItemRecord] - [Is_For]
+[Is_For] -> [ItemRequest]
