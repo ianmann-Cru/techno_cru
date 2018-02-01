@@ -17,8 +17,11 @@ MEMBER_ROLES = {
     "STAFF": ("cru | role | Staff member", "Staff Member"),
 }
 
-# Create your models here.
 class TeamMember(User):
+    """
+    A proxy model for the Django User model This provides methods that handel
+    logic having to do with roles and permissions.
+    """
 
     class Meta:
         proxy = True
