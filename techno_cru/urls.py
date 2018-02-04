@@ -17,8 +17,10 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 from main import urls as main_urls
+from wishlist import urls as wishlist_urls
 
 urlpatterns = [
     url(r'^helm/', admin.site.urls),
-    url(r'^', include(main_urls, namespace="main"))
+    url(r'^', include(main_urls, namespace="main")),
+    url(r'^wishlist/', include(wishlist_urls, namespace="wishlist"))
 ]

@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+from ezi.views import model_crud_api_view_factory
+
 from main.models import TeamMember
 
 class Wishlist(models.Model):
@@ -37,6 +39,9 @@ class Wishlist(models.Model):
         permenant           Whether or not this wishlist is a root wishlist that
                             should never be deleted
     """
+    @classmethod
+    def crud_api_view(cls): return model_crud_api_view_factory(cls)
+
     created_by = models.ForeignKey(TeamMember, null=True, blank=True)
     name = models.CharField(max_length=20)
     purpose = models.CharField(max_length=100)
@@ -46,6 +51,19 @@ class Wishlist(models.Model):
     date_complete = models.DateTimeField(null=True, blank=True)
     comments = models.TextField(null=True, blank=True)
     permenant = models.BooleanField(default=False)
+
+    def json(self):
+        return {
+            "created_by": str(self.created_by),
+            "name": self.name,
+            "purpose": self.purpose,
+            "date_started": self.date_started,
+            "active": self.active,
+            "date_inactive": self.date_inactive,
+            "date_complete": self.date_complete,
+            "comments": self.comments,
+            "permenant": self.permenant
+        }
 
 
 class ItemRequest(models.Model):

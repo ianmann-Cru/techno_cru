@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'wishlist',
     'main',
+    'ezi',
 ]
 
 MIDDLEWARE = [
