@@ -1,0 +1,31 @@
+* {
+  font-family: Helvetica;
+}
+
+body {
+  position: relative;
+  min-height: 100%;
+  padding: 0;
+  margin: 0px;
+}
+
+#header_container {
+  height: 350px;
+}
+
+#body_container {
+  padding-bottom: 100px; /*Height of footer (#footer_container). These should match.*/
+}
+
+#footer_container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  height: 70px; /* plus 30 for padding top and bottom*/
+}
+
+#doc_main_content {
+  width: 450px;
+}

@@ -1,0 +1,59 @@
+* {
+  --main-color-dark: #004f95;
+  --main-color-dark-2: #333;
+  --main-color-light: #53afa4;
+  --main-color-light-2: #85c6ae;
+  --gray-color-light: #f2f2f2;
+  --gray-color-light-2: #fbfbfb;
+  --gray-color-dark: #a6a6a6;
+  --color-black: #222;
+  margin: 0px;
+  padding: 0px;
+}
+
+.flex { display: flex; }
+.column { flex-direction: column; }
+.row { flex-direction: row; }
+.j-spc-btwn { justify-content: space-between; }
+.j-center { justify-content: center; }
+.j-start { justify-content: flex-start; }
+.a-center { align-items: center; }
+.a-stretch { align-items: stretch; }
+.a-end { align-items: flex-end; }
+
+.m0px { margin: 0px; }
+.p5px { padding: 5px; }
+.pt5px { padding-top: 5px; }
+.pb5px { padding-bottom: 5px; }
+.pr5px { padding-right: 5px; }
+.pl5px { padding-left: 5px; }
+.p15px { padding: 15px; }
+.pt15px { padding-top: 15px; }
+.pb15px { padding-bottom: 15px; }
+.pt25px { padding-top: 25px; }
+.pr25px { padding-right: 25px; }
+.pb25px { padding-bottom: 25px; }
+.pl25px { padding-left: 25px; }
+.pl25px--ul { padding-left: 47px; }
+.p15px { padding: 15px; }
+.hfull { height: 100%; }
+.wfull { width: 100%; }
+.w450px { width: 450px; }
+
+.txt-gry-lt,
+.txt-gry-lt a { color: var(--gray-color-light); }
+
+.txt-gry-dk,
+.txt-gry-dk a { color: var(--gray-color-dark); }
+
+.txt-blk,
+.txt-blk a { color: var(--color-black); }
+
+.fnt-48 { font-size: 48px; }
+
+.bg-m-dk { background-color: var(--main-color-dark); }
+.bg-m-dk-2 { background-color: var(--main-color-dark-2); }
+.bg-m-lt { background-color: var(--main-color-light); }
+.bg-m-lt-2 { background-color: var(--main-color-light-2); }
+.bg-gry-lt { background-color: var(--gray-color-light); }
+.bg-gry-lt-2 { background-color: var(--gray-color-light-2); }
