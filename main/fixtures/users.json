@@ -7,8 +7,26 @@
         "last_login": null,
         "is_superuser": true,
         "username": "ianmann56",
-        "first_name": "",
-        "last_name": "",
+        "first_name": "Ian",
+        "last_name": "Kirkpatrick",
+        "email": "ianmann56@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2018-02-08T16:37:39.282Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$36000$uDirqs22Sf69$nvVaps4Kb/jB6ygVZ/HqnydqbHwSGwH99ZhvF61EGXU=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "sean_beard_man",
+        "first_name": "Sean",
+        "last_name": "Riley",
         "email": "ianmann56@gmail.com",
         "is_staff": true,
         "is_active": true,

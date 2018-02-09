@@ -8,6 +8,7 @@ from django.views.generic.detail import DetailView
 from main.utils import ctx_with_settings
 from wishlist.models import Wishlist
 
+
 class WishlistIndexView(DetailView):
 
     model = Wishlist

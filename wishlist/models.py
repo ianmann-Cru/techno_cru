@@ -65,6 +65,9 @@ class Wishlist(models.Model):
             "permenant": self.permenant
         }
 
+    def __str__(self):
+        return "{this.name} <- {this.created_by.full_name}".format(this=self)
+
 
 class ItemRequest(models.Model):
     """
@@ -100,6 +103,8 @@ class ItemRequest(models.Model):
 
         needed                  Whether or not Cru actually needs this item.
     """
+    ONLINE_ORDER_LINKS_DELIMITER = "|,|"
+
     belongs_to = models.ForeignKey(Wishlist)
     requested_by = models.ForeignKey(TeamMember)
     name = models.CharField(max_length=50)
@@ -110,6 +115,26 @@ class ItemRequest(models.Model):
     priority = models.DecimalField(max_digits=2, decimal_places=1)
     date_requested = models.DateTimeField(auto_now_add=True)
     needed = models.BooleanField(default=True)
+
+    @property
+    def order_links_list(self):
+        """
+        Splits the delimited string value of online_order_links into a list of
+        links. The value for online_order_links is expected to be a string that
+        has one or more http links separated by the value of the delimiter,
+        ONLINE_ORDER_LINKS_DELIMITER.
+
+        This property returns the fields value, parsed into a list of just the
+        http links.
+        """
+        links = []
+        if self.online_order_links:
+            for link in self.online_order_links.split(self.ONLINE_ORDER_LINKS_DELIMITER):
+                links.append(link)
+        return links
+
+    def __str__(self):
+        return "{this.name} in wishlist: {this.belongs_to.name}".format(this=self)
 
 
 class ItemRecord(models.Model):
@@ -140,8 +165,29 @@ class ItemRecord(models.Model):
         ("ah", "Already Have")
     )
 
+    RECORD_TYPES_DICT = dict(RECORD_TYPES)
+
     reported_by = models.ForeignKey(TeamMember)
     is_for = models.ForeignKey(ItemRequest)
     item_type = models.CharField(max_length=2, choices=RECORD_TYPES)
     comments = models.TextField(null=True, blank=True)
     cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    date_reported = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def nice_item_type(self):
+        """Returns the english version of the item type."""
+        return self.RECORD_TYPES_DICT[self.item_type]
+
+    @property
+    def message(self):
+        """
+        Returns the message to be displayed for this record. Depending on what
+        type of record it is, the message will be in a different format.
+        """
+        if self.item_type == "un":
+            return "marked this as not needed"
+        elif self.item_type == "bt":
+            return "bought this for ${:,.2f}".format(self.cost)
+        else:
+            return "says we aleady have this"

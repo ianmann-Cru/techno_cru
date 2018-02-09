@@ -83,3 +83,7 @@ class TeamMember(User):
     def is_cru_staff(self):
         """Determines whether or not the user is a staff member in Cru."""
         return self.groups.filter(name=MEMBER_ROLES["STAFF"][0]).exists()
+
+    @property
+    def full_name(self):
+        return "{} {}".format(self.first_name, self.last_name)

@@ -1,7 +1,103 @@
 {% extends 'base.html' %}
+{% load core %}
+
+{% block title %}
+Wishlist Details
+{% endblock %}
 
 {% block content %}
-{% for item in object.itemrequest_set.all %}
-{{ item }}
-{% endfor %}
+<div class="flex row j-center">
+  <div id="wishlist_display" class="list-container">
+
+    <div id="wishlist_header" class="bg-m-lt list-header-container">
+      <h3 class="txt-gry-lt">{{ object.name }} Wishlist</h3>
+    </div>
+
+    <div id="wishlist_content" class="bg-gry-lt list-content-container">
+      {% for item in object.itemrequest_set.all %}
+      <div class="list-item brdr-btm-gray">
+        <div class="flex row j-spc-btwn ps15px pt5px">
+          <p>{{ item.name }}</p>
+          <p>Priority: {{ item.priority }}</p>
+        </div>
+        <div class="flex row j-spc-btwn ps15px pt5px pb5px">
+          <p>Requested by:</p>
+          <p>{{ item.requested_by.full_name }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+
+
+
+  {% with object.itemrequest_set.all.0 as item %}
+  <div id="wishlist_display" class="list-container">
+
+    <div id="wishlist_header" class="bg-m-lt list-header-container list-header-container--details">
+      <div class="flex row j-spc-btwn ps15px pt5px txt-gry-lt">
+        <p>{{ item.name }}</p>
+        <p>Priority: {{ item.priority }}</p>
+      </div>
+      <div class="flex row j-spc-btwn ps15px pt5px pb5px txt-gry-lt">
+        <p>Requested by:</p>
+        <p>{{ item.requested_by.full_name }}</p>
+      </div>
+    </div>
+
+    <div id="wishlist_content" class="bg-gry-lt list-content-container">
+      <div class="ps15px brdr-btm-gray">
+        <p class="mt5px">
+          {{ item.description }}
+        </p>
+        <p class="mt5px">
+          {{ item.notes }}
+        </p>
+        <p class="mt5px mb5px">
+          {% if item.needed %}
+          This is needed.
+          {% else %}
+          This is not necessarily needed.
+          {% endif %}
+        </p>
+      </div>
+
+      <div class="ps15px pb5px brdr-btm-gray">
+        <p class="mt5px">
+          Buy {{ item.quantity }} at
+        </p>
+        {% for link in item.order_links_list %}
+        <a href="{{ link }}" class="mt5px">
+          {{ link|slice:":30" }}
+          {% if link|length > 30 %}
+          ...
+          {% endif %}
+        </a>
+        {% endfor %}
+      </div>
+
+      {% with item.itemrecord_set.all.0 as record %}
+      <div class="ps15px">
+        <p class="mt5px txt-bold">Records:</p>
+        <p class="mt5px mb5px">
+          <span class="txt-udrln">{{ record.nice_item_type }}:</span>
+          <span>
+            {{ record.reported_by.full_name }}
+          </span>
+          <span>
+            {{ record.message }}
+          </span>
+          on
+          <span>
+            {{ record.date_reported }}
+          </span>
+        </p>
+      </div>
+      {% endwith %}
+
+    </div>
+  </div>
+  {% endwith %}
+</div>
 {% endblock %}
