@@ -52,3 +52,8 @@ body {
   height: 450px;
   overflow-y: scroll;
 }
+
+.button-list-add {
+  position: relative;
+  right: 15px;
+}

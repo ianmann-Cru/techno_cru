@@ -1,0 +1,13 @@
+<!-- HTML for a quick view of an ItemRequest in the
+list view of a wishlist. -->
+<div class="js-wishlist-list-item list-item brdr-btm-gray"
+      data-pk="{{ item.pk }}">
+  <div class="flex row j-spc-btwn ps15px pt5px">
+    <p>{{ item.name }}</p>
+    <p>Priority: {{ item.priority }}</p>
+  </div>
+  <div class="flex row j-spc-btwn ps15px pt5px pb5px">
+    <p>Requested by:</p>
+    <p>{{ item.requested_by.full_name }}</p>
+  </div>
+</div>

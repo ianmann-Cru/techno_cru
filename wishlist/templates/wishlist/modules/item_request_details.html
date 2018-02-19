@@ -1,0 +1,69 @@
+<!-- HTML that shows the in depth details of an
+ItemRequest in the detailed display for an ItemRequest. -->
+<div id="wishlist_header" class="bg-m-lt list-header-container list-header-container--details">
+  {% if item %}
+  <div class="flex row j-spc-btwn ps15px pt5px txt-gry-lt">
+    <p>{{ item.name }}</p>
+    <p>Priority: {{ item.priority }}</p>
+  </div>
+  <div class="flex row j-spc-btwn ps15px pt5px pb5px txt-gry-lt">
+    <p>Requested by:</p>
+    <p>{{ item.requested_by.full_name }}</p>
+  </div>
+  {% else %}
+  <p class="txt-gry-lt p15px">No item selected.</p>
+  {% endif %}
+</div>
+
+<div class="js-details-container bg-gry-lt list-content-container">
+  {% if item %}
+  <div class="ps15px brdr-btm-gray">
+    <p class="mt5px">
+      {{ item.description }}
+    </p>
+    <p class="mt5px">
+      {{ item.notes }}
+    </p>
+    <p class="mt5px mb5px">
+      {% if item.needed %}
+      This is needed.
+      {% else %}
+      This is not necessarily needed.
+      {% endif %}
+    </p>
+  </div>
+
+  <div class="ps15px pb5px brdr-btm-gray">
+    <p class="mt5px">
+      Buy {{ item.quantity }} at
+    </p>
+    {% for link in item.order_links_list %}
+    <a href="{{ link }}" class="mt5px">
+      {{ link|slice:":30" }}
+      {% if link|length > 30 %}
+      ...
+      {% endif %}
+    </a>
+    {% endfor %}
+  </div>
+
+  {% for record in item.itemrecord_set.all %}
+  <div class="ps15px">
+    <p class="mt5px txt-bold">Records:</p>
+    <p class="mt5px mb5px">
+      <span class="txt-udrln">{{ record.nice_item_type }}:</span>
+      <span>
+        {{ record.reported_by.full_name }}
+      </span>
+      <span>
+        {{ record.message }}
+      </span>
+      on
+      <span>
+        {{ record.date_reported }}
+      </span>
+    </p>
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>

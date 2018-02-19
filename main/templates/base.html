@@ -4,6 +4,9 @@
     <title>Techno Cru | {% block title %}{% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'utilities.css' %}" />
     <link rel="stylesheet" href="{% static 'base.css' %}" />
+    <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    {% block javascript %}
+    {% endblock %}
   </head>
   <body>
     <div id="header_container"
