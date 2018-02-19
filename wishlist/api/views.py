@@ -11,7 +11,9 @@ from django.views.generic.detail import DetailView
 
 from ezi.views import ApiView
 
+from main.models import TeamMember
 from main.utils import ctx_with_settings
+from wishlist.forms import ItemRequestAddForm
 from wishlist.models import Wishlist, ItemRequest
 
 @login_required
@@ -39,4 +41,24 @@ def get_item_request_details_html(request, item_pk):
         except ItemRequest.DoesNotExist:
             item = None
         response = render_to_string("wishlist/modules/item_request_details.html", {"item": item})
+        return HttpResponse(response)
+
+@login_required
+def get_item_request_add_form_html(request, wishlist_pk):
+    if not request.method == "GET":
+        return HttpResponseBadRequest("Please don't do that.")
+    elif not Wishlist.objects.filter(pk=wishlist_pk).exists():
+        return HttpResponseBadRequest("That wishlist doesn't exist.")
+    else:
+        def initialize_item_form():
+            item_form_initial = {
+                "belongs_to": wishlist_pk,
+                "requested_by": request.user.pk,
+            }
+            form = ItemRequestAddForm(initial=item_form_initial)
+            return form
+        context = {
+            "item_form": initialize_item_form()
+        }
+        response = render_to_string("wishlist/modules/item_request_add.html", context)
         return HttpResponse(response)

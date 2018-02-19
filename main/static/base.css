@@ -33,6 +33,7 @@ body {
 
 .list-container {
   width: 300px;
+  height: 500px;
   margin: 25px 15px 25px 15px;
   box-shadow: 5px 5px 5px gray;
 }
@@ -49,7 +50,6 @@ body {
 }
 
 .list-content-container {
-  height: 450px;
   overflow-y: scroll;
 }
 

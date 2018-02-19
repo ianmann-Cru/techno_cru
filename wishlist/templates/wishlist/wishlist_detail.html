@@ -15,7 +15,7 @@ Wishlist Details
   <div id="wishlist_display" class="flex row j-center p0px m0px">
 
     <!-- Wishlist List Display -->
-    <div class="js-wishlist-container list-container"
+    <div class="js-wishlist-container list-container bg-gry-lt"
           data-pk="{{ object.pk }}">
 
       <div id="wishlist_header" class="bg-m-lt list-header-container">
@@ -26,7 +26,7 @@ Wishlist Details
         <p>Add item request.</p>
       </div>
 
-      <div id="wishlist_content" class="js-list-content bg-gry-lt list-content-container">
+      <div id="wishlist_content" class="js-list-content list-content-container">
         {% for item in object.itemrequest_set.all %}
         {% include "wishlist/modules/item_request.html" with item=item %}
         {% endfor %}
@@ -38,13 +38,13 @@ Wishlist Details
 
 
 
-    <div id="item_request_details" class="js-item-details-component list-container">
+    <div id="item_request_details" class="js-item-details-component list-container bg-gry-lt">
 
       <div id="wishlist_header" class="bg-m-lt list-header-container list-header-container--details">
         <p class="txt-gry-lt p15px">No item selected.</p>
       </div>
 
-      <div id="wishlist_content" class="bg-gry-lt list-content-container">
+      <div id="wishlist_content" class="list-content-container">
 
       </div>
     </div>

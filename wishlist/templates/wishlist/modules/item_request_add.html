@@ -1,9 +1,34 @@
 <!-- HTML that shows the form used to create an
 ItemRequest in the detailed display for an ItemRequest. -->
-<div id="wishlist_header" class="bg-m-lt list-header-container list-header-container--details">
-
+<div id="wishlist_header" class="bg-m-lt list-header-container list-header-container">
+  <h3 class="txt-gry-lt">Request Item:</h3>
 </div>
 
-<div class="js-details-container bg-gry-lt list-content-container">
-  
+<div class="js-details-container list-content-container">
+  <form class="js-submit-item-add-form">
+    <div>
+      {{ item_form.name }}
+    </div>
+    <div>
+      {{ item_form.quantity }}
+    </div>
+    <div>
+      {{ item_form.description }}
+    </div>
+    <div>
+      {{ item_form.notes }}
+    </div>
+    <div>
+      {{ item_form.online_order_links }}
+    </div>
+    <div>
+      {{ item_form.priority }}
+    </div>
+    <div>
+      {{ item_form.needed }}
+    </div>
+    <div>
+      <div class="js-add-itemrequest-submit">Submit Request</div>
+    </div>
+  </form>
 </div>

@@ -26,6 +26,8 @@ CRU_INFO = {
     "MTL_EMAIL": "tobias.keyes@cru.org"
 }
 
+LOGIN_URL = "/helm/login/"
+
 
 # Application definition
 

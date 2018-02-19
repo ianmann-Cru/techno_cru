@@ -2,9 +2,13 @@ var LIST_CONTENT_DESIGNATOR = ".js-list-content";
 var ITEM_DETAIL_CONTAINER_DESIGNATOR = ".js-item-details-component";
 var WISHLIST_CONTAINER_DESIGNATOR = ".js-wishlist-container";
 var WISHLIST_LIST_ITEM_DESIGNATOR = ".js-wishlist-list-item";
-var WISHLIST_ITEM_ADD_DESIGNATOR = ".js-list-add-button";
+var WISHLIST_GET_ITEM_ADD_FORM_DESIGNATOR = ".js-list-add-button";
+var WISHLIST_ITEM_ADD_SUBMIT_DESIGNATOR = ".js-add-itemrequest-submit";
+var WISHLIST_ITEM_ADD_FORM_DESIGNATOR = ".js-submit-item-add-form";
+
 var API_GET_ITEM_HTML = "/wishlist/api/item_request/";
 var API_GET_ITEM_DETAILS_HTML = "/wishlist/api/item_request/details/";
+var API_GET_ITEM_ADD_HTML = "/wishlist/api/item_request/add/form/";
 
 function Wishlist(selector) {
     this.selector = selector;
@@ -43,11 +47,11 @@ function Wishlist(selector) {
     Populates the item detail window with the details of
     the ItemRecord with the given primary key.
     */
-    this.showItemDetails = function(pk) {
+    this.showItemDetails = function(wishlist_pk) {
       var thisWishlist = this;
       this.itemDetailDisplay().empty();
       $.ajax({
-        url: API_GET_ITEM_DETAILS_HTML + pk,
+        url: API_GET_ITEM_DETAILS_HTML + wishlist_pk,
         dataType: "html",
         success: function(itemDetails) {
           thisWishlist.itemDetailDisplay().html(itemDetails);
@@ -58,18 +62,47 @@ function Wishlist(selector) {
       });
     }
 
+    this.showAddForm = function(wishlist_pk) {
+      var thisWishlist = this;
+      $.ajax({
+        url: API_GET_ITEM_ADD_HTML + wishlist_pk,
+        dataType: "html",
+        success: function(addForm) {
+          thisWishlist.itemDetailDisplay().html(addForm);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+          alert("Dude, can you not? Something's not right.")
+        }
+      });
+    }
+
+    this.submitAddItem = function() {
+      data = serializeForm($(this.selector + " " + WISHLIST_ITEM_ADD_FORM_DESIGNATOR));
+      console.log(data);
+      // This is working up to this point. now just submit the form.
+    }
+
     /**
     Initializes JQuery events.
     */
     this.initEvents = function() {
       var thisWishlist = this;
+
+      // Initialize jquery to show item details
       $(document).on("click", this.selector + " " + WISHLIST_LIST_ITEM_DESIGNATOR, function() {
-        pk = parseInt($(this).attr("data-pk"));
-        thisWishlist.showItemDetails(pk);
+        wishlist_pk = thisWishlist.pk();
+        thisWishlist.showItemDetails(wishlist_pk);
       });
 
-      $(document).on("click", this.selector + " " + WISHLIST_ITEM_ADD_DESIGNATOR, function() {
-        
+      // Initialize jquery to show add form.
+      $(document).on("click", this.selector + " " + WISHLIST_GET_ITEM_ADD_FORM_DESIGNATOR, function() {
+        wishlist_pk = thisWishlist.pk();
+        thisWishlist.showAddForm(wishlist_pk);
+      });
+
+      // Initialize jquery to show add form.
+      $(document).on("click", this.selector + " " + WISHLIST_ITEM_ADD_SUBMIT_DESIGNATOR, function() {
+        thisWishlist.submitAddItem();
       });
     }
 
