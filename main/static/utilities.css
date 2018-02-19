@@ -2,7 +2,7 @@
   --main-color-dark: #004f95;
   --main-color-dark-2: #333;
   --main-color-light: #53afa4;
-  --main-color-light-2: #85c6ae;
+  --main-color-light-2: #b0f1d9;
   --gray-color-light: #f2f2f2;
   --gray-color-light-2: #fbfbfb;
   --gray-color-dark: #a6a6a6;
@@ -90,4 +90,13 @@
 }
 .txt-udrln {
   text-decoration: underline;
+}
+
+.button {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 5px;
 }

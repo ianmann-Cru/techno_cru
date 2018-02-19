@@ -9,6 +9,7 @@ var WISHLIST_ITEM_ADD_FORM_DESIGNATOR = ".js-submit-item-add-form";
 var API_GET_ITEM_HTML = "/wishlist/api/item_request/";
 var API_GET_ITEM_DETAILS_HTML = "/wishlist/api/item_request/details/";
 var API_GET_ITEM_ADD_HTML = "/wishlist/api/item_request/add/form/";
+var API_ADD_ITEM_REQUEST = "/wishlist/api/item_request/add/submit/";
 
 function Wishlist(selector) {
     this.selector = selector;
@@ -62,6 +63,10 @@ function Wishlist(selector) {
       });
     }
 
+    /**
+    Shows the html (in the detail display box) that is used to create a new
+    item request.
+    */
     this.showAddForm = function(wishlist_pk) {
       var thisWishlist = this;
       $.ajax({
@@ -76,10 +81,36 @@ function Wishlist(selector) {
       });
     }
 
-    this.submitAddItem = function() {
+    this.clearAddForm = function() {
+      wishlist_pk = this.pk();
+      this.showAddForm(wishlist_pk);
+    }
+
+    /**
+    Grabs the input from the add form and submits the item_request to the server
+    to be created. If successful, the form is refreshed.
+    */
+    this.submitAddItem = function(wishlist_pk) {
+      var thisWishlist = this;
+
       data = serializeForm($(this.selector + " " + WISHLIST_ITEM_ADD_FORM_DESIGNATOR));
-      console.log(data);
-      // This is working up to this point. now just submit the form.
+      data.csrfmiddlewaretoken = getCsrfToken();
+      $.ajax({
+        url: API_ADD_ITEM_REQUEST + wishlist_pk + "/",
+        method: "post",
+        dataType: "json",
+        data: data,
+        success: function(response) {
+          if (!response.item_request) {
+            alert(Object.values(response.errors).join("\n"));
+          }
+          thisWishlist.clearAddForm();
+          thisWishlist.refresh();
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+          alert("Uhhh... ¯\\_(ツ)_/¯? Something's not right.")
+        }
+      });
     }
 
     /**
@@ -100,9 +131,10 @@ function Wishlist(selector) {
         thisWishlist.showAddForm(wishlist_pk);
       });
 
-      // Initialize jquery to show add form.
+      // Initialize jquery to submit the add form.
       $(document).on("click", this.selector + " " + WISHLIST_ITEM_ADD_SUBMIT_DESIGNATOR, function() {
-        thisWishlist.submitAddItem();
+        wishlist_pk = thisWishlist.pk();
+        thisWishlist.submitAddItem(wishlist_pk);
       });
     }
 

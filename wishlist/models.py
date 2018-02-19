@@ -136,6 +136,11 @@ class ItemRequest(models.Model):
     def __str__(self):
         return "{this.name} in wishlist: {this.belongs_to.name}".format(this=self)
 
+    def json(self):
+        return {
+            "pk": self.pk
+        }
+
 
 class ItemRecord(models.Model):
     """
