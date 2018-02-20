@@ -26,7 +26,7 @@ Wishlist Details
         <p>Add item request.</p>
       </div>
 
-      <div id="wishlist_content" class="js-list-content list-content-container">
+      <div id="wishlist_content" class="js-list-content list-content-container" style="height: 394.91px">
         {% for item in object.itemrequest_set.all %}
         {% include "wishlist/modules/item_request.html" with item=item %}
         {% endfor %}

@@ -100,3 +100,5 @@
   padding: 5px;
   border-radius: 5px;
 }
+
+.scroll-y { overflow-y: scroll; }

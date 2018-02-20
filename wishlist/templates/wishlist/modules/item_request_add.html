@@ -4,27 +4,34 @@ ItemRequest in the detailed display for an ItemRequest. -->
   <h3 class="txt-gry-lt">Request Item:</h3>
 </div>
 
-<div class="js-details-container list-content-container ps15px pt5px pb5px">
+<div class="js-details-container list-content-container ps15px pt5px pb5px scroll-y" style="height: 435px;">
   <form class="js-submit-item-add-form">
-    <div>
+    <div class="pb5px flex j-spc-btwn">
+      <label for="{{ item_form.name.id_for_label }}">Item Name:</label>
       {{ item_form.name }}
     </div>
-    <div>
+    <div class="pb5px flex j-spc-btwn">
+      <label for="{{ item_form.quantity.id_for_label }}">Quantity:</label>
       {{ item_form.quantity }}
     </div>
-    <div>
+    <div class="pb5px flex j-spc-btwn">
+      <label for="{{ item_form.description.id_for_label }}">Description:</label>
       {{ item_form.description }}
     </div>
-    <div>
+    <div class="pb5px">
+      <label for="{{ item_form.notes.id_for_label }}">Extra Notes:</label>
       {{ item_form.notes }}
     </div>
-    <div>
+    <div class="pb5px">
+      <label for="{{ item_form.online_order_links.id_for_label }}">Links to Buy From:</label>
       {{ item_form.online_order_links }}
     </div>
-    <div>
+    <div class="pb5px flex j-spc-btwn">
+      <label for="{{ item_form.priority.id_for_label }}">Item Priority:</label>
       {{ item_form.priority }}
     </div>
-    <div>
+    <div class="pb5px flex j-spc-btwn">
+      <label for="{{ item_form.needed.id_for_label }}">Is this Item Needed?</label>
       {{ item_form.needed }}
     </div>
     <div>
