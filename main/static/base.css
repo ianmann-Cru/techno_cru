@@ -53,7 +53,14 @@ body {
   overflow-y: scroll;
 }
 
-.button-list-add {
-  position: relative;
-  right: 15px;
+.button-list-add--small {
+  height: 20px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-link {
+  width: 240px;
 }

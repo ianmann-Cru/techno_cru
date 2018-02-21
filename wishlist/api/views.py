@@ -62,7 +62,8 @@ def get_item_request_add_form_html(request, wishlist_pk):
             form = ItemRequestAddForm(initial=item_form_initial)
             return form
         context = {
-            "item_form": initialize_item_form()
+            "item_form": initialize_item_form(),
+            "online_order_links_delimiter": ItemRequest.ONLINE_ORDER_LINKS_DELIMITER
         }
         response = render_to_string("wishlist/modules/item_request_add.html", context, request=request)
         return HttpResponse(response)

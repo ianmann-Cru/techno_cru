@@ -22,9 +22,12 @@ ItemRequest in the detailed display for an ItemRequest. -->
       <label for="{{ item_form.notes.id_for_label }}">Extra Notes:</label>
       {{ item_form.notes }}
     </div>
-    <div class="pb5px">
+    <div class="js-order-link-widget" meta-online-order-links-delimiter="{{ online_order_links_delimiter }}">
       <label for="{{ item_form.online_order_links.id_for_label }}">Links to Buy From:</label>
-      {{ item_form.online_order_links }}
+      <div class="js-order-link-widget-actual display-none">{{ item_form.online_order_links }}</div>
+      <div class="js-order-link-widget-control flex column pt5px">
+        <!-- Link templates from botton of this template go here. -->
+      </div>
     </div>
     <div class="pb5px flex j-spc-btwn">
       <label for="{{ item_form.priority.id_for_label }}">Item Priority:</label>
@@ -38,4 +41,15 @@ ItemRequest in the detailed display for an ItemRequest. -->
       <div class="js-add-itemrequest-submit bg-m-lt-2 txt-blk button">Submit</div>
     </div>
   </form>
+</div>
+
+<div class="js-order-link-group--template js-order-link-group flex row j-spc-btwn pb5px display-none">
+  <input class="js-order-link-input js-for-editing input-link" placeholder="https://linktoproduct.com"></input>
+  <a class="js-order-link-display js-for-display display-none">newlink</a>
+  <div class="js-order-link-add-btn js-for-editing button-list-add--small bg-m-lt-2">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="24" viewBox="0 0 24 24" width="24">
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+    </svg>
+  </div>
 </div>
