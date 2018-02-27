@@ -11,3 +11,4 @@ class ItemRequestAddForm(forms.ModelForm):
     class Meta:
         model = ItemRequest
         exclude = ["date_requested"]
+        widgets = {"online_order_links": forms.TextInput}

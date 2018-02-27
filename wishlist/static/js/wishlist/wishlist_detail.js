@@ -11,12 +11,13 @@ Parameters:
                    fields that make up the widget.
 */
 function LinksWidget(widgetSelector) {
-  this.ACTUAL_INPUT_SELECTOR = ".js-order-link-widget-actual";
+  this.ACTUAL_INPUT_SELECTOR = ".js-order-link-widget-actual > #id_online_order_links";
   this.WIDGET_LIST_CONTAINER = ".js-order-link-widget-control";
   this.NEW_LINK_GROUP_SELECTOR = ".js-order-link-group";
   this.ADDED_LINK_DISPLAY_SELECTOR = ".js-order-link-display";
   this.NEW_LINK_INPUT_SELECTOR = ".js-order-link-input";
   this.NEW_LINK_ADD_BTN_SELECTOR = ".js-order-link-add-btn";
+  this.NEW_LINK_REMOVE_BTN_SELECTOR = ".js-order-link-remove-btn";
   this.NEW_LINK_TEMPLATE_SELECTOR = ".js-order-link-group--template";
 
   this.selector = widgetSelector;
@@ -35,7 +36,7 @@ function LinksWidget(widgetSelector) {
   this.getInputVals = function() {
     var thisWidget = this;
     var inputs = [];
-    $(this.selector + " " + this.NEW_LINK_INPUT_SELECTOR).each(function() {
+    $(this.selector + " " + this.NEW_LINK_INPUT_SELECTOR).not(this.NEW_LINK_TEMPLATE_SELECTOR).each(function() {
       inputs.push($(this).val());
     });
     return inputs;
@@ -85,13 +86,18 @@ function LinksWidget(widgetSelector) {
   */
   this.confirmAddNewLink = function() {
     var thisWidget = this;
+    finished = true;
+
     $(this.selector + " " + this.NEW_LINK_GROUP_SELECTOR).each(function() {
-      val = thisWidget.getInputValSingle($(this))
+      val = thisWidget.getInputValSingle($(this));
       if (val.length > 0) {
         thisWidget.finalizeLink($(this));
+      } else {
+        finished = false;
       }
     });
     this.syncInput();
+    return finished;
   }
 
   this.openNewEmptyLinkInput = function() {
@@ -102,8 +108,15 @@ function LinksWidget(widgetSelector) {
   }
 
   this.submitOpenLinkInput = function() {
-    this.confirmAddNewLink();
-    this.openNewEmptyLinkInput();
+    linkFinished = this.confirmAddNewLink();
+    if (linkFinished) {
+      this.openNewEmptyLinkInput();
+    }
+  }
+
+  this.deleteLink = function(button) {
+    button.parent().remove();
+    this.syncInput();
   }
 
   /**
@@ -115,6 +128,11 @@ function LinksWidget(widgetSelector) {
     // Initialize event for when user presses add button on links widget.
     $(document).on("click", this.selector + " " + this.NEW_LINK_ADD_BTN_SELECTOR, function() {
       thisWidget.submitOpenLinkInput()
+    });
+
+    // Initialize event for when user presses delete button on links widget.
+    $(document).on("click", this.selector + " " + this.NEW_LINK_REMOVE_BTN_SELECTOR, function() {
+      thisWidget.deleteLink($(this))
     });
   }
 
@@ -178,11 +196,11 @@ function Wishlist(selector) {
     Populates the item detail window with the details of
     the ItemRecord with the given primary key.
     */
-    this.showItemDetails = function(wishlist_pk) {
+    this.showItemDetails = function(item_pk) {
       var thisWishlist = this;
       this.itemDetailDisplay().empty();
       $.ajax({
-        url: API_GET_ITEM_DETAILS_HTML + wishlist_pk,
+        url: API_GET_ITEM_DETAILS_HTML + item_pk,
         dataType: "html",
         success: function(itemDetails) {
           thisWishlist.itemDetailDisplay().html(itemDetails);
@@ -252,8 +270,8 @@ function Wishlist(selector) {
 
       // Initialize jquery to show item details
       $(document).on("click", this.selector + " " + WISHLIST_LIST_ITEM_DESIGNATOR, function() {
-        wishlist_pk = thisWishlist.pk();
-        thisWishlist.showItemDetails(wishlist_pk);
+        itemPk = $(this).attr("data-pk");
+        thisWishlist.showItemDetails(itemPk);
       });
 
       // Initialize jquery to show add form.

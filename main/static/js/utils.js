@@ -5,6 +5,7 @@ function serializeForm(form) {
   // Found in the 3rd answer on
   // https://stackoverflow.com/questions/2276463/how-can-i-get-form-data-with-javascript-jquery
   return form.serializeArray().reduce(function(obj, item) {
+    console.log(item.value);
       obj[item.name] = item.value;
       return obj;
   }, {});
