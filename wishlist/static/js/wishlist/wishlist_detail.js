@@ -1,3 +1,137 @@
+function ItemRecordWidget(parentWishlist, widgetSelector) {
+  /**
+  SELECTOR_FIELD_FORMAT: allows dynamic retrieval of a field by plugging in
+  the field name.
+  */
+  this.SELECTOR_FIELD_FORMAT = ".js-item-record-{format}";
+  this.SELECTOR_TYPE_INPUT = ".js-item-record-type";
+  this.SELECTOR_COST_INPUT = ".js-item-record-cost";
+  this.SELECTOR_NOTES_INPUT = ".js-item-record-notes";
+  this.SELECTOR_SHOW_ADD_FORM_BUTTON = ".js-item-record-btn-show-add-form";
+  this.SELECTOR_FORM_CONTAINER = ".js-form-add-record";
+  this.SELECTOR_SUBMIT_FORM = ".js-item-record-submit";
+
+  this.URL_SUBMIT = "/wishlist/api/item_request/{item_request_pk}/item_record/add/submit/";
+
+  this.INPUT_OPTIONS_VALUES = {
+    bought: "bt",
+    already_have: "ah",
+    unnecessary: "un"
+  };
+
+  this.selector = widgetSelector;
+  this.parentWishlist = parentWishlist;
+
+  /**
+  Removes input for all fields in the form.
+  */
+  this.clearAddForm = function() {
+    this.field("type").val("");
+    this.field("cost").val("");
+    this.field("notes").val("");
+  }
+
+  this.showAddForm = function() {
+    $(this.selector + " " + this.SELECTOR_FORM_CONTAINER).removeClass("display-none");
+  }
+  this.hideAddForm = function() {
+    $(this.selector + " " + this.SELECTOR_FORM_CONTAINER).addClass("display-none");
+  }
+  this.toggleAddForm = function() {
+    form = $(this.selector + " " + this.SELECTOR_FORM_CONTAINER);
+    if (form.hasClass("display-none")) {
+      this.showAddForm();
+    } else {
+      this.hideAddForm();
+    }
+  }
+
+  /**
+  Returns the field with the given name. The name must match exactly the name in
+  the selector of the field.
+  */
+  this.field = function(fieldName) {
+    return $(this.selector + " " + this.SELECTOR_FIELD_FORMAT.replace("{format}", fieldName));
+  }
+
+  /**
+  Returnes the input that the user has put in to the form.
+  This is in the form of a dictionary where each key is
+  the field name and the values are the field values.
+  */
+  this.getInput = function() {
+    type = $(this.selector + " " + this.SELECTOR_TYPE_INPUT).val();
+    cost = $(this.selector + " " + this.SELECTOR_COST_INPUT).val();
+    notes = $(this.selector + " " + this.SELECTOR_NOTES_INPUT).val();
+    if (type == this.INPUT_OPTIONS_VALUES.bought && (cost == "" || cost == undefined)) {
+      cost = 0;
+    }
+    return {
+      item_type: type,
+      cost: cost,
+      comments: notes
+    };
+  }
+
+  this.setPriceFieldVisibility = function() {
+    input = this.getInput();
+    if (input.type == this.INPUT_OPTIONS_VALUES.bought) {
+      this.field("cost").removeClass("display-none");
+    } else {
+      this.field("cost").val("");
+      this.field("cost").addClass("display-none");
+    }
+  }
+
+  this.submit = function() {
+    var thisWidget = this;
+    input = this.getInput();
+    input.csrfmiddlewaretoken = getCsrfToken();
+    url = this.URL_SUBMIT.replace("{item_request_pk}", this.parentWishlist.openItemRequestPk.toString());
+    $.ajax({
+      url: url,
+      method: "POST",
+      dataType: "json",
+      data: input,
+      success: function(json) {
+        if (json.success) {
+          thisWidget.parentWishlist.showItemDetails(thisWidget.parentWishlist.openItemRequestPk);
+        } else {
+          alert("Bro, please fill out all the fields.")
+        }
+      },
+      error: function(xhr, ajaxOptions, thrownError) {
+        alert("Bro, that item record crap don't work.");
+      }
+    });
+  }
+
+  this.initEvents = function() {
+    var thisWidget = this;
+    $(document).on("click", this.selector + " " + this.SELECTOR_SHOW_ADD_FORM_BUTTON, function() {
+      thisWidget.toggleAddForm();
+    });
+
+    $(document).on("change", this.selector + " " + this.SELECTOR_TYPE_INPUT, function() {
+      thisWidget.setPriceFieldVisibility();
+    });
+
+    $(document).on("click", this.selector + " " + this.SELECTOR_SUBMIT_FORM, function() {
+      thisWidget.submit();
+    });
+  }
+
+  this.setPriceFieldVisibility();
+  this.initEvents();
+}
+
+
+
+
+
+
+
+
 /**
 Contains JavaScript for the links widget for adding or editing an ItemRequest.
 This widget allows user to enter multiple links in separate input fields. Then
@@ -153,6 +287,7 @@ var WISHLIST_GET_ITEM_ADD_FORM_DESIGNATOR = ".js-list-add-button";
 var WISHLIST_ITEM_ADD_SUBMIT_DESIGNATOR = ".js-add-itemrequest-submit";
 var WISHLIST_ITEM_ADD_FORM_DESIGNATOR = ".js-submit-item-add-form";
 var WISHLIST_ITEM_ADD_LINKS_WIDGET_DESIGNATOR = ".js-order-link-widget";
+var WISHLIST_ITEMRECORD_WIDGET_DESIGNATOR = ".js-widget-item-records";
 
 var API_GET_ITEM_HTML = "/wishlist/api/item_request/";
 var API_GET_ITEM_DETAILS_HTML = "/wishlist/api/item_request/details/";
@@ -161,6 +296,7 @@ var API_ADD_ITEM_REQUEST = "/wishlist/api/item_request/add/submit/";
 
 function Wishlist(selector) {
     this.selector = selector;
+    this.openItemRequestPk = undefined;
     this.listContainer = function() {
       return $(this.selector).find(WISHLIST_CONTAINER_DESIGNATOR);
     }
@@ -204,6 +340,7 @@ function Wishlist(selector) {
         dataType: "html",
         success: function(itemDetails) {
           thisWishlist.itemDetailDisplay().html(itemDetails);
+          thisWishlist.openItemRequestPk = parseInt(item_pk);
         },
         error: function(xhr, ajaxOptions, thrownError) {
           alert("Bro, what are you doing? Something's not right.");
@@ -291,6 +428,7 @@ function Wishlist(selector) {
     this.refresh();
 
     this.linksWidget = new LinksWidget(this.selector + " " + WISHLIST_ITEM_ADD_LINKS_WIDGET_DESIGNATOR);
+    this.itemRecordWidget = new ItemRecordWidget(this, this.selector + " " + WISHLIST_ITEMRECORD_WIDGET_DESIGNATOR);
 }
 
 

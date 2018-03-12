@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseBadRequest, HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.utils.decorators import method_decorator
 from django.views.generic.detail import DetailView
@@ -13,8 +13,8 @@ from ezi.views import ApiView
 
 from main.models import TeamMember
 from main.utils import ctx_with_settings
-from wishlist.forms import ItemRequestAddForm
-from wishlist.models import Wishlist, ItemRequest
+from wishlist.forms import ItemRequestAddForm, ItemRecordAddForm
+from wishlist.models import Wishlist, ItemRequest, ItemRecord
 
 @login_required
 def get_item_request_html(request, wish_pk):
@@ -38,9 +38,21 @@ def get_item_request_details_html(request, item_pk):
     else:
         try:
             item = ItemRequest.objects.get(pk=item_pk)
+            context = {
+                "item": item,
+                "record_form": {
+                    "record_types": ItemRecord.RECORD_TYPES_DICT
+                }
+            }
         except ItemRequest.DoesNotExist:
             item = None
-        response = render_to_string("wishlist/modules/item_request_details.html", {"item": item})
+            context = {
+                "item": item,
+                "record_form": {
+                    "record_types": ItemRecord.RECORD_TYPES_DICT
+                }
+            }
+        response = render_to_string("wishlist/modules/item_request_details.html", context)
         return HttpResponse(response)
 
 @login_required
@@ -103,3 +115,14 @@ def add_item_request(request, wishlist_pk):
         item_form = initialize_item_form()
         response = process_form(item_form)
         return JsonResponse(response)
+
+@login_required
+def add_item_record(request, item_request_pk):
+    item_request = get_object_or_404(ItemRequest, pk=item_request_pk)
+    item_record_form = ItemRecordAddForm(request.user, item_request, request.POST)
+    if item_record_form.is_valid():
+        item_record = item_record_form.save()
+        response = {"success": True, "item_record": item_record.pk}
+    else:
+        response = {"success": False, "errors": item_record_form.errors}
+    return JsonResponse(response)
