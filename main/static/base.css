@@ -31,7 +31,7 @@ body {
   width: 450px;
 }
 
-.list-container {
+.list-container.list-layout-list {
   width: 300px;
   height: 500px;
   margin: 25px 15px 25px 15px;
@@ -63,4 +63,22 @@ body {
 
 .input-link {
   width: 240px;
+}
+
+.list-container.list-layout-grid {
+  display: flex;
+  justify-content: center;
+}
+
+.list-layout-grid > .list-item {
+  background-color: var(--main-color-dark);
+  cursor: pointer;
+}
+
+.list-layout-grid > a.list-item {
+  text-decoration: none;
+}
+
+.list-layout-grid > .list-item:hover {
+  background-color: var(--main-color-light);
 }

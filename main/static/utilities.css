@@ -11,6 +11,11 @@
   padding: 0px;
 }
 
+.pointer,
+.pointer * {
+  cursor: pointer;
+}
+
 .display-none { display: none !important; }
 .flex { display: flex; }
 .column { flex-direction: column; }

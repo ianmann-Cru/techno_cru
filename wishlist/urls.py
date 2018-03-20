@@ -5,10 +5,12 @@ from ezi.urls import crud_api_url_factory
 from wishlist.models import Wishlist, ItemRequest, ItemRecord
 
 from wishlist.views import WishlistIndexView
+from wishlist.views import WishlistListView
 from wishlist.api.views import get_item_request_html, get_item_request_details_html, get_item_request_add_form_html, add_item_request, add_item_record
 
 urlpatterns = [
     url(r'^index/(?P<pk>\d+)/$', WishlistIndexView.as_view(), name="index"),
+    url(r'^list/$', WishlistListView.as_view(), name="list")
 ]
 
 urlpatterns += [

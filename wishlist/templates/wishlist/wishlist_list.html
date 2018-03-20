@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load core %}
+{% load static %}
+
+{% block title %}
+Wishlist List
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" src="{% static 'js/wishlist/wishlist_list.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="flex row j-center pt15px">
+  <div class="list-container list-layout-grid">
+    {% for wishlist in object_list %}
+    <a href="{% url 'wishlist:index' wishlist.pk %}" class="list-item dark p15px txt-gry-lt ms15px">
+      <p>
+        {{ wishlist.name }}
+      </p>
+      <p>
+        Created by: {{ wishlist.created_by }}
+      </p>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}
