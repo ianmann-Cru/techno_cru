@@ -82,3 +82,17 @@ body {
 .list-layout-grid > .list-item:hover {
   background-color: var(--main-color-light);
 }
+
+.button {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.button--light {
+  background-color: var(--main-color-light);
+  color: var(--gray-color-light);
+}
+
+.button--light:active {
+  background-color: var(--main-color-light-2);
+}

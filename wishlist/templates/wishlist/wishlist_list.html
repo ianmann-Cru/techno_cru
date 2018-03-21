@@ -11,7 +11,7 @@ Wishlist List
 {% endblock %}
 
 {% block content %}
-<div class="flex row j-center pt15px">
+<div class="flex column j-center a-center pt15px">
   <div class="list-container list-layout-grid">
     {% for wishlist in object_list %}
     <a href="{% url 'wishlist:index' wishlist.pk %}" class="list-item dark p15px txt-gry-lt ms15px">
@@ -23,6 +23,30 @@ Wishlist List
       </p>
     </a>
     {% endfor %}
+  </div>
+  <div class="flex column grow a-center pt15px pb15px">
+    <div id="btn_show_add_wishlist_form" class="button button--light flex grow pointer">Add Wishlist</div>
+    <div id="add_wishlist_form" class="flex column display-none">
+      <div class="display-none">
+        {{ add_form.created_by }}
+      </div>
+      <div class="flex row pt15px j-spc-btwn">
+        <div class="flex row pr10px">
+          {{ add_form.name.label }}
+        </div>
+        <div>
+          {{ add_form.name }}
+        </div>
+      </div>
+      <div class="flex row pt15px j-spc-btwn">
+        <div class="flex row pr10px">
+          {{ add_form.purpose.label }}
+        </div>
+        <div>
+          {{ add_form.purpose }}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock content %}

@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms.widgets import PasswordInput, TextInput
 
-from wishlist.models import ItemRequest, ItemRecord
+from wishlist.models import ItemRequest, ItemRecord, Wishlist
 
 class ItemRequestAddForm(forms.ModelForm):
 
@@ -25,3 +25,10 @@ class ItemRecordAddForm(forms.ModelForm):
         self.data._mutable = True
         self.data["reported_by"] = reported_by.pk
         self.data["is_for"] = is_for.pk
+
+
+class WishlistAddForm(forms.ModelForm):
+
+    class Meta:
+        model = Wishlist
+        fields = ["created_by", "name", "purpose"]

@@ -11,6 +11,7 @@ from django.views.generic.list import ListView
 from ezi.views import ApiView
 
 from main.utils import ctx_with_settings
+from wishlist.forms import WishlistAddForm
 from wishlist.models import Wishlist
 
 
@@ -33,4 +34,5 @@ class WishlistListView(ListView):
     def get_context_data(self, *args, **kwargs):
         context = super(WishlistListView, self).get_context_data(*args, **kwargs)
         context["settings"] = settings
+        context["add_form"] = WishlistAddForm(initial={"created_by": self.request.user.pk})
         return context
