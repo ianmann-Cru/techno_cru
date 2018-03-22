@@ -17,7 +17,8 @@
 }
 
 .display-none { display: none !important; }
-.flex { display: flex; }
+.flex { display: flex; flex-wrap: wrap; }
+.no-wrap { flex-wrap: nowrap; }
 .column { flex-direction: column; }
 .row { flex-direction: row; }
 .j-spc-btwn { justify-content: space-between; }

@@ -12,40 +12,48 @@ Wishlist List
 
 {% block content %}
 <div class="flex column j-center a-center pt15px">
-  <div class="list-container list-layout-grid">
+  <div class="list-container--large list-container list-layout-grid">
     {% for wishlist in object_list %}
-    <a href="{% url 'wishlist:index' wishlist.pk %}" class="list-item dark p15px txt-gry-lt ms15px">
-      <p>
+    <div onclick="window.location = '{% url 'wishlist:index' wishlist.pk %}';" class="column list-item dark p15px txt-gry-lt m15px">
+      <p class="flex">
         {{ wishlist.name }}
       </p>
-      <p>
+      <p class="flex">
         Created by: {{ wishlist.created_by }}
       </p>
-    </a>
+    </div>
     {% endfor %}
   </div>
   <div class="flex column grow a-center pt15px pb15px">
     <div id="btn_show_add_wishlist_form" class="button button--light flex grow pointer">Add Wishlist</div>
     <div id="add_wishlist_form" class="flex column display-none">
-      <div class="display-none">
-        {{ add_form.created_by }}
-      </div>
-      <div class="flex row pt15px j-spc-btwn">
-        <div class="flex row pr10px">
-          {{ add_form.name.label }}
+      <form id="add_wishlist_form_form" action="{% url 'wishlist:create' %}" method="post">
+        <div class="display-none">
+          {{ add_form.created_by }}
+          {% csrf_token %}
         </div>
-        <div>
-          {{ add_form.name }}
+        <div class="flex row pt15px j-spc-btwn">
+          <div class="flex row pr10px">
+            {{ add_form.name.label }}
+          </div>
+          <div>
+            {{ add_form.name }}
+          </div>
         </div>
-      </div>
-      <div class="flex row pt15px j-spc-btwn">
-        <div class="flex row pr10px">
-          {{ add_form.purpose.label }}
+        <div class="flex row pt15px j-spc-btwn">
+          <div class="flex row pr10px">
+            {{ add_form.purpose.label }}
+          </div>
+          <div>
+            {{ add_form.purpose }}
+          </div>
         </div>
-        <div>
-          {{ add_form.purpose }}
+        <div class="flex row pt15px j-spc-btwn">
+          <div class="flex row pr10px">
+            <button type="submit" value="submit">Submit</button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>

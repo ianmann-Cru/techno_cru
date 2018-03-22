@@ -65,9 +65,22 @@ body {
   width: 240px;
 }
 
+.list-container > .list-item {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .list-container.list-layout-grid {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.list-container--large {
+  max-width: 900px;
+}
+
+.list-container--large > .list-item {
+  width: 200px;
 }
 
 .list-layout-grid > .list-item {
