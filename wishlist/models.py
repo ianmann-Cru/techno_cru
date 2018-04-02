@@ -167,7 +167,8 @@ class ItemRecord(models.Model):
     RECORD_TYPES = (
         ("un", "Unnecessary"),
         ("bt", "Bought"),
-        ("ah", "Already Have")
+        ("ah", "Already Have"),
+        ("cp", "Complete")
     )
 
     RECORD_TYPES_DICT = dict(RECORD_TYPES)
@@ -194,5 +195,7 @@ class ItemRecord(models.Model):
             return "marked this as not needed"
         elif self.item_type == "bt":
             return "bought this for ${:,.2f}".format(self.cost)
+        elif self.item_type == "cp":
+            return "marked this as complete."
         else:
             return "says we aleady have this"

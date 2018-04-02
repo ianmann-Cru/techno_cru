@@ -109,3 +109,19 @@ body {
 .button--light:active {
   background-color: var(--main-color-light-2);
 }
+
+.details-container-main {
+  /* max-height: 110px;
+  overflow-y: scroll; */
+  /* flex-shrink: 0; */
+}
+
+.details-container-links {
+   /* max-height: 100px;
+   overflow-y: scroll-y */
+   /* flex-shrink: 0; */
+}
+
+.details-container-records {
+  /* overflow-y: scroll; */
+}

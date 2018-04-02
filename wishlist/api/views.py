@@ -25,7 +25,7 @@ def get_item_request_html(request, wish_pk):
     if not request.method == "GET":
         return HttpResponseBadRequest("Please don't do that.")
     else:
-        items = ItemRequest.objects.filter(belongs_to__id=wish_pk)
+        items = ItemRequest.objects.filter(belongs_to__id=wish_pk).exclude(itemrecord__item_type="cp")
         response = ""
         for item in items:
             response += render_to_string("wishlist/modules/item_request.html", {"item": item})

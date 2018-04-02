@@ -15,16 +15,16 @@ ItemRequest in the detailed display for an ItemRequest. -->
   {% endif %}
 </div>
 
-<div class="js-details-container bg-gry-lt list-content-container">
+<div class="js-details-container bg-gry-lt list-content-container" style="height: 445px;">
   {% if item %}
-  <div class="ps15px brdr-btm-gray">
-    <p class="mt5px">
+  <div class="details-container-main flex column ps15px brdr-btm-gray">
+    <p class="mt5px flex">
       {{ item.description }}
     </p>
-    <p class="mt5px">
+    <p class="mt5px flex">
       {{ item.notes }}
     </p>
-    <p class="mt5px mb5px">
+    <p class="mt5px mb5px flex">
       {% if item.needed %}
       This is needed.
       {% else %}
@@ -33,7 +33,7 @@ ItemRequest in the detailed display for an ItemRequest. -->
     </p>
   </div>
 
-  <div class="flex column ps15px pb5px brdr-btm-gray">
+  <div class="details-container-links flex column ps15px pb5px brdr-btm-gray">
     <p class="mt5px">
       Buy {{ item.quantity }} at
     </p>
@@ -47,7 +47,7 @@ ItemRequest in the detailed display for an ItemRequest. -->
     {% endfor %}
   </div>
 
-  <div class="ps15px js-widget-item-records scroll-y" style="height: 246px;">
+  <div class="details-container-records flex column ps15px js-widget-item-records">
     <div class="flex row j-spc-btwn">
       <p class="mt5px txt-bold">Actions:</p>
       <div class="js-item-record-btn-show-add-form">

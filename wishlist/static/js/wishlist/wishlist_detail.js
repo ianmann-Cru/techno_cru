@@ -75,7 +75,7 @@ function ItemRecordWidget(parentWishlist, widgetSelector) {
 
   this.setPriceFieldVisibility = function() {
     input = this.getInput();
-    if (input.type == this.INPUT_OPTIONS_VALUES.bought) {
+    if (input.item_type == this.INPUT_OPTIONS_VALUES.bought) {
       this.field("cost").removeClass("display-none");
     } else {
       this.field("cost").val("");
@@ -96,6 +96,7 @@ function ItemRecordWidget(parentWishlist, widgetSelector) {
       success: function(json) {
         if (json.success) {
           thisWidget.parentWishlist.showItemDetails(thisWidget.parentWishlist.openItemRequestPk);
+          thisWidget.parentWishlist.refresh()
         } else {
           alert("Bro, please fill out all the fields.")
         }
