@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic import RedirectView
 
 from main import urls as main_urls
 from wishlist import urls as wishlist_urls
 
 urlpatterns = [
     url(r'^helm/', admin.site.urls),
+    url(r'^$', RedirectView.as_view(url=reverse_lazy('wishlist:list'), permanent=False)),
     url(r'^', include(main_urls, namespace="main")),
     url(r'^wishlist/', include(wishlist_urls, namespace="wishlist"))
 ]
